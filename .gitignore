@@ -1,0 +1,10 @@
+*.gz
+*.out
+*.zip
+*.txt
+*.pdf
+Link*
+*/.idea/
+*/.vs/
+*/cmake*
+*.zip
