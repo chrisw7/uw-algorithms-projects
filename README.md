@@ -22,19 +22,27 @@ The relationship between objects is often just as important as the information s
 - **Equivalence relations** - Relationships where objects can be partitioned into subsets (equivalence relations) with owhter 'weakly' related (x~y) objects
   - *Examples*: Landau symbol *Ө* ```2n ~ 5n ∈ Ө(n)```
 - **Weak orderings** - A linear ordering of equivalence classes
-  - *Examples*: Big-O notation ```O(1) < O(ln(n)) < O(n•ln(n))``` 
+  - *Examples*: Big-O notation ```O(1) < O(ln(n)) < O(nln(n))``` 
 - **Adjacency Relations** - Relationships described by one object being connected to another (x ↔ y)
   - *Examples*: Graphs, social networks
   
 ### Asymptotic Analysis & Big-O Notation
 It's often useful to analyze and compare algorithms with respect to one or more variables (i.e. run-time, memory). Using the same 'Big O' mathematical notation and Landau symbols used to describe the limiting behaviour of a function, the efficiency of different algorithms can be compared. For two algorithms described by the functions ```f(n)``` and ```g(n)```, the best- and worst-case behaviour of the algorithms  can be described as such (*n* can be a measure of run-time or memory):
+
+![Big-O limits](img/big-O.png)
+
 - ```f(n) = o(g(n))``` when ```f(n)``` approaches ∞ at a slower rate than ```g(n)``` (**f outperforms g**)
 - ```f(n) = O(g(n))``` when ```f(n)``` approaches ∞ at a rate equal to or slower than ```g(n)``` (**f, at *worst*, performs the same g**)
-- ```f(n) = Ω(g(n))``` when ```f(n)``` approaches ∞ at a rate faster than or equal to ```g(n)``` (**f, at *best*, performs the same g**)
+- ```f(n) = Ω(g(n))``` when ```f(n)``` approaches ∞ at a rateequal to or faster than```g(n)``` 
+(**f, at *best*, performs the same g**)
 - ```f(n) = ω(g(n))``` when ```f(n)``` approaches ∞ at a much slower rate than ```g(n)``` (**g outperforms f**)
 - ```f(n) = Ө(g(n))``` when ```f(n)``` and ```g(n)``` approach ∞ at comparable rates (**f and g perform roughly the same**)
 
-Note that since this notation descibes limiting behaviour, one should be wary of making objective statements about the relative performance of two different algorithms without context. As a result, even though f may run faster than g on 1 million objects, the opposite could be true when the same algorithms are run on only 1000 objects. Similarly, since Big-O notation gives information about the relative scaling of different algorithms rather than their absolute performance, for an algorithm f that is faster than another, g, by a constant factor, ```f(n) = Ө(g(n))``` is still true.
+Note that since this notation descibes limiting behaviour, one should be wary of making objective statements about the relative performance of two different algorithms without context. As a result, even though f may run faster than g on 1 million objects, the opposite could be true when the same algorithms are run on only 1000 objects. Similarly, since Big-O notation gives information about the relative scaling and complexity of different algorithms rather than their absolute performance, for an algorithm f that is faster than another, g, by a constant factor, ```f(n) = Ө(g(n))``` is still true.
+
+Keeping in mind these caveats, Landau symbols proves useful for describing the complexity of an algorithm. An algorithm is considered to run in *polynomial time* if its run time can be described by ```O(n^d)``` for d greater than or equal to zero. Algotithms with polynomial time complexity are considered efficient in the current non-quantum state of computing, whereas problems that can not be solved in polynomial time are considered intractable or infeasible (e.g. the travelling salesman problem with complexity O(n^22^n) at best). Although these problems could still theoretically be solved, the scaling is computationally inefficient enough that it is typically not worth the effort except for special cases of the problem.
+
+![Weak ordering using Landau symbols](img/little-o.png)
 
 ---
 ## Linked Lists
@@ -44,8 +52,12 @@ Linked lists are the simplest type of data structure, consisting of a set of lin
 - Pros: Simple, O(1) insertions w/out reallocation
 - Cons: Inefficient Indexing, poor cache locality
 
-### Project 1: [Doubly Linked Sentinel List](https://ece.uwaterloo.ca/~dwharder/aads/Projects/1/Double_sentinel_list/) (24/24)
-\<Type\> templated linked list w/a second sentinel at the end (for improved indexing/insertion at the back of the list) and O(1) copy & move contructors.
+![Double sentinel list schematic](img/linked-list.png)
+
+### Project 1: [Doubly Linked Sentinel List](1 Doubly Linked List/README.md) (24/24)
+
+**Project Description:**https://ece.uwaterloo.ca/~dwharder/aads/Projects/1/Double_sentinel_list/
+Grade: 24/24 (100%)
   
 ##### Member Variables
 - ```Double_Node list_head```
