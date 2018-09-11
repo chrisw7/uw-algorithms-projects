@@ -52,7 +52,7 @@ Linked lists are the simplest type of data structure, consisting of a set of lin
 - Pros: Simple, O(1) insertions w/out reallocation
 - Cons: Inefficient indexing, poor cache locality
 
-### Project 1: [Doubly Linked Sentinel List](1 Doubly Linked List/README.md)
+### Project 1: [Doubly Linked Sentinel List](<1 Doubly Linked List/README.md>)
 Templated doubly linked list with front and back sentinel nodes
 
 **Project Description:** https://ece.uwaterloo.ca/~dwharder/aads/Projects/1/Double_sentinel_list/
@@ -68,9 +68,9 @@ Traditional stacks display last-in-first-out (LIFO) behaviour meaning the first 
 
 #### Other Considerations
 
-Despite being a relatively simple data structure, efforts to optimize the efficiency of real-life implementations can be very complicated. For example, stacks and queues can also be implemented efficiently using dynamic arrays. Whereas prepending to a linked list is always O(1), appending elements to an array list is *amortized* O(1) meaning although the total time for n insertions is O(n), the time bound of any individual insertions can be much worse. This is a result of the cost of resizing a full array and reallocating contiguous blocks of memory. Conversely, unlike linked lists which usually require O(n) memory to store pointers in each node, the memory overhead for a dynamic array is typically O(1) (only approaching O(n) after the array capacity is doubled). Other examples of stack-based structure implementations include queues with dynamic array used as a circular buffer and other more esoteric structures like hybrid VLists.
+Despite being a relatively simple data structure, efforts to optimize the efficiency of real-life implementations can be very complicated. For example, stacks and queues can also be implemented efficiently using dynamic arrays. Whereas prepending to a linked list is always O(1), appending elements to an array list is *amortized* O(1) meaning although the total time for n insertions is O(n), the time bound of any individual insertions can be much worse. This is a result of the cost of resizing a full array and reallocating contiguous blocks of memory. Conversely, unlike linked lists which usually require O(n) memory to store pointers in each node, the memory overhead for a dynamic array is typically O(1) (only approaching O(n) after the array capacity is doubled). Other examples of stack-based structure implementations include queues with dynamic array used as a circular buffer, priority queues, and other more esoteric structures like hybrid VLists.
 
-### Project 2: [Resizable Deque](2 Resizable Deque/README.md)
+### Project 2: [Resizable Deque](<2 Resizable Deque/README.md>)
 Templated doubly linked list with front and back sentinel nodes
 
 **Project Description:** https://ece.uwaterloo.ca/~dwharder/aads/Projects/2/Resizable_deque/
