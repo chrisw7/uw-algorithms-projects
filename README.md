@@ -13,7 +13,7 @@ Data structures & algorithms govern the way we interact with digital information
 ### Relationships & Orderings
 The relationship between objects is often just as important as the information stored in the object. Most data structures can be described using the following six relationships:
 
-- **Linear orderings** - Every object is strictly less than, equal to, or greater than another and vice versa (transitive)
+<!-- - **Linear orderings** - Every object is strictly less than, equal to, or greater than another and vice versa (transitive)
   - *Examples*: Integer & Real Number sets, hexadecimal memory addresses, the alphabet
 - **Hierarchical orderings** - Each object has a *parent* object with the exception of a singular *root* object
   - *Examples*: Unix directories, class inheritance in C# and Java
@@ -22,9 +22,18 @@ The relationship between objects is often just as important as the information s
 - **Equivalence relations** - Relationships where objects can be partitioned into subsets (equivalence relations) with other 'weakly' related (x~y) objects
   - *Examples*: Landau symbol *Ө* ```2n ~ 5n ∈ Ө(n)```
 - **Weak orderings** - A linear ordering of equivalence classes
-  - *Examples*: Big-O notation ```O(1)```< ```O(ln(n))``` < ```O(nln(n))``` 
+  - *Examples*: Big-O notation ```O(1)```< ```O(ln(n))``` < ```O(n·ln(n))``` 
 - **Adjacency Relations** - Relationships described by one object being connected to another (x ↔ y)
-  - *Examples*: Graphs, social networks
+  - *Examples*: Graphs, social networks -->
+  
+| Relationship 			| Description	| Examples |
+| --- 					| --- 			| --- |
+| Linear ordering		| Every object is strictly less than, equal to, or greater than another and vice versa (transitive) | Integer & Real Number sets, hexadecimal memory addresses, the alphabet
+| Hierarchical ordering	| Each object has a *parent* object with the exception of a singular *root* object |  Unix directories, class inheritance in C# and Java
+| Partial orderings		| A hierarchical ordering with 1 or more root and no loops |  C++ classes (multiple inheritance), compilation dependencies
+| Equivalence relations	| Relationships where objects can be partitioned into subsets (equivalence relations) with other 'weakly' related (x~y) objects |  Landau symbol *Ө* ```2n ~ 5n ∈ Ө(n)```
+| Weak orderings		| A linear ordering of equivalence classes |  Big-O notation ```O(1)```< ```O(ln(n))``` < ```O(n·ln(n))``` 
+| Adjacency Relations	| Relationships described by one object being connected to another (x ↔ y) |  Graphs, social networks
   
 ### Asymptotic Analysis & Big-O Notation
 It's often useful to analyze and compare algorithms with respect to one or more variables (i.e. run-time, memory). Using the same 'Big O' mathematical notation and Landau symbols used to describe the limiting behaviour of a function, the efficiency of different algorithms can be compared. For two algorithms described by the functions ```f(n)``` and ```g(n)```, the best- and worst-case behaviour of the algorithms  can be described as such (*n* can be a measure of run-time or memory):
@@ -40,7 +49,7 @@ It's often useful to analyze and compare algorithms with respect to one or more 
 
 Note that since this notation describes limiting behaviour, one should be wary of making objective statements about the relative performance of two different algorithms without context. For example, even though f may run faster than g for n = 1000000, the opposite could be true when the same algorithms are run on only 1000 objects. Similarly, since Big-O notation gives information about the relative scaling and complexity of different algorithms rather than their absolute performance, for an algorithm f that scales faster than another, g, by a constant factor, ```f(n) = Ө(g(n))``` is still true.
 
-After taking these caveats into consideration, Landau symbols prove very useful for describing the complexity of an algorithm. An algorithm is considered to run in *polynomial time* if its run time can be described by ```O(n^d)``` for d greater than or equal to zero. Algorithms with polynomial time complexity are considered efficient in the current non-quantum state of computing, whereas problems that can not be solved in polynomial time are considered intractable or infeasible (e.g. the traveling salesman problem with complexity O(n^22^n) at best). Although these problems could still theoretically be solved, the scaling is computationally inefficient enough that it is typically not worth the effort except for special cases of the problem.
+After taking these caveats into consideration, Landau symbols prove very useful for describing the complexity of an algorithm. An algorithm is considered to run in *polynomial time* if its run time can be described by ```O(n^d)``` for d greater than or equal to zero. Algorithms with polynomial time complexity are considered efficient in the current non-quantum state of computing, whereas problems that can not be solved in polynomial time are considered intractable or infeasible (e.g. the traveling salesman problem with complexity ```O(n<sup>2</sup>2<sup>n</sup>) at best)```. Although these problems could still theoretically be solved, the scaling is computationally inefficient enough that it is typically not worth the effort except for special cases of the problem.
 
 <p align="center"><img src="img/little-o.png"/></p>
 
@@ -52,11 +61,10 @@ Linked lists are the simplest type of data structure, consisting of a set of lin
 - Pros: Simple, ```O(1)``` insertions w/out reallocation
 - Cons: Inefficient indexing, poor cache locality
 
-### Project 1: [Doubly Linked Sentinel List](<1 Doubly Linked List/README.md>)
+### Project 1: [Doubly Linked Sentinel List](<1 Doubly Linked List/>)
 Templated doubly linked list with front and back sentinel nodes
 
 **Project Description:** https://ece.uwaterloo.ca/~dwharder/aads/Projects/1/Double_sentinel_list/
-
 ![Double sentinel list schematic](img/linked-list.png)
 
 ---
@@ -70,9 +78,8 @@ Traditional stacks display last-in-first-out (LIFO) behaviour meaning the first 
 
 Despite being a relatively simple data structure, efforts to optimize the efficiency of real-life implementations can be very complicated. For example, stacks and queues can also be implemented efficiently using dynamic arrays. Whereas prepending to a linked list is always ```O(1)```, appending elements to an array list is *amortized* ```O(1)``` meaning although the total time for n insertions is ```O(n)```, the time bound of any individual insertions can be much worse. This is a result of the cost of resizing a full array and reallocating contiguous blocks of memory. Conversely, unlike linked lists which usually require ```O(n)``` memory to store pointers in each node, the memory overhead for a dynamic array is typically ```O(1)``` (only approaching ```O(n)``` after the array capacity is doubled). Other examples of stack-based structure implementations include queues with dynamic array used as a circular buffer, priority queues, and other more esoteric structures like hybrid VLists.
 
-### Project 2: [Resizable Deque](<2 Resizable Deque/README.md>)
+### Project 2: [Resizable Deque](<2 Resizable Deque/>)
 Templated doubly linked list with front and back sentinel nodes
-
 **Project Description:** https://ece.uwaterloo.ca/~dwharder/aads/Projects/2/Resizable_deque/
 
 ![Deque schematic](img/deque.png)
@@ -85,19 +92,34 @@ Perhaps one of the most widely used and versatile data structures is the hierarc
 #### *N*-ary trees
 An *N*-ary tree is a tree with each node containing at most *N* sub-trees. Each node of a binary search tree, for example, contains at most two children normally referred to as the 'left' and 'right' child. In a 'perfect' *N*-ary tree, every node has exactly two children except for the nodes at the maximum depth (bottom layer) of the tree which are leaf nodes (with no children). A 'complete' *N*-ary on the other hand, must be filled from left to right meaning the tree is perfect except for the leaf nodes a the deepest level (which may or may not be filled).
 
-A perfect *N*-ary tree with height h will by definition always contain n=(*N*<sup>h+1</sup>-1) / (*N*-1) nodes, which for a binary tree simplifies to (2<sup>h+1</sup>-1) nodes. Rearranging for the height, *h* we find h= log<sub>*N*</sub>(n(*N*-1)+1)-1 which is typically approximated as h =~ log<sub>*N*</sub>(n). This proves important for run-time analyses of operations on trees, which are usually ```O(h)```. For example, because order is preserved in complete binary trees, they can be used to store sorted lists where every node of a left sub-tree contains elements strictly smaller than the root element, and every node of a right sub-tree contains elements strictly greater than the root element (known as a binary search tree). Unlike arrays and other sorted list structures with ```O(n)``` operations, finding and inserting elements in a binary search trees only requires an ```O(h)``` depth-first (recursive) traversal of the tree. Note that operations on a worst-case unbalanced tree with h=n (essentially a linked list) will still be ```O(n)```.
+A perfect *N*-ary tree with height h will by definition always contain n=(*N*<sup>h+1</sup>-1) / (*N*-1) nodes, which for a binary tree simplifies to 2<sup>h+1</sup>-1 nodes. Rearranging for the height, h we find h= log<sub>*N*</sub>(n(*N*-1)+1)-1 which is typically approximated as h =~ log<sub>*N*</sub>(n). This proves important for run-time analyses of operations on trees, which are usually ```O(h)```. For example, because order is preserved in complete binary trees, they can be used to store sorted lists where every node of a left sub-tree contains elements strictly smaller than the root element, and every node of a right sub-tree contains elements strictly greater than the root element (known as a binary search tree). Unlike arrays and other sorted list structures with ```O(n)``` operations, finding and inserting elements in a binary search trees only requires an ```O(h)``` depth-first (recursive) traversal of the tree. Note that operations on a worst-case unbalanced tree with h=n (essentially a linked list) will still be ```O(n)```.
 
 <p align="center"><img src="img/tree.png"/></p>
 
 #### Balanced Trees & Other Tree Data Structures
 
 Given the importance of tree height on their performance, it's no surprise extensive efforts are typically made to optimize the height of tree structures. Although the best-case scenario of a perfect tree (in which the descendants of each nodes are perfectly balanced) is not always achievable their are a variety of algorithms available that aim to balance trees using different criteria. **AVL trees** use a height balancing algorithm that compares the height of child sub-trees to determine whether the tree is in a state of in balance before performing a series of rotations to restore balance. 
-A binary heap also uses the binary tree structure, and are frequently used to implement priority queues. The distinguishing feature of a min-heap is that every child contains a key less than or equal to its parent (and vice versa for max-heaps). A B+-tree is another example of a balanced *N*-ary tree with a variable (and typically large) number of children for each node that is particularly useful in retrieval of block-oriented storage contexts (i.e file systems). Finally, unlike an *N*-ary tree, a multi-way (*M*-way) search tree can store *M*-1 elements and can have up to *M* sub-trees.
 
-### Project 3: [Resizable Deque](<3 AVL Search Tree/README.md>)
+A **binary heap** also uses the binary tree structure, and are frequently used to implement priority queues. The distinguishing feature of a min-heap is that every child contains a key less than or equal to its parent (and vice versa for max-heaps). A **B+-tree** is another example of a balanced *N*-ary tree with a variable (and typically large) number of children for each node that is particularly useful in retrieval of block-oriented storage contexts (i.e file systems). Finally, unlike an *N*-ary tree, a **multi-way (*M*-way) search tree** can store *M*-1 elements and can have up to *M* sub-trees.
+
+### Project 3: [AVL Search Tree](<3 AVL Search Tree/>)
 Self-balancing binary search tree w/iterator protected nodes
-
 **Project Description:** https://ece.uwaterloo.ca/~dwharder/aads/Projects/3/AVL_tree/
+
+---
+## Sorting Algorithms
+
+At a fundamental level sorting involves taking an abstract list containing unsorted objects and converting it into a list of linearly ordered objects (an Abstract Sorted Lists). These operations are typically performed on arrays since they are the data type most commonly used for storing. *In-place* sorting algorithms can perform this conversion without making a second copy of the list in memory meaning memory allocation is ```Ө(1)``` at most. In terms of run-time efficiency, sorting algorithms fall into three different categories: ```Ө(n)```, ```Ө(n·ln(n))```, and ```O(n<sup>2</sup>)```, depending on the degree of unsortedness in the list an other factors. Of course, since every sorting algorithm must inspect every one of the n elements being sorted at least once, there is a ```Ω(n) ``` lower bound on the run-time of sorting algorithms (```Ω(n·ln(n)``` being more realistic in most scenarios).
+
+#### ```O(n<sup>2</sup>)``` sorts
+- Starting from the first element of an array, **Insertion Sort** steps through elements of an array until it finds an unsorted element then moves that element to its appropriate place at the (sorted) beginning of the list before continuing to step through unsorted elements. In other words, new entries are 'inserted' in-place into a growing sorted list
+- 
+
+
+
+
+
+
 
 
 

@@ -1,7 +1,7 @@
 ### Project 2: Resizable Deque
  <Type> templated circular array implementation of a resizable deque structure. Capacity of dynamic array is doubled when push is called in a deque overflow state resulting in amortized. O(1) push operations.
 
-**Full Project Description:**https://ece.uwaterloo.ca/~dwharder/aads/Projects/1/Double_sentinel_list/
+**Full Project Description:** https://ece.uwaterloo.ca/~dwharder/aads/Projects/2/Resizable_deque/
 Grade: 28/28 (100%)
   
 ##### Accessors
