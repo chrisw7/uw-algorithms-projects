@@ -2,7 +2,7 @@
 
 | Complete? 			| Description 	| Grade |
 | :---: 				| :--- 			| --- 	|
-| :heavy_check_mark: 	|  <Type> templated circular array implementation of a resizable deque structure. Capacity of dynamic array is doubled when push is called in a deque overflow state resulting in amortized. O(1) push operations | **28/28** (100%) |
+| :heavy_check_mark: 	|  <Type> templated resizable deque structure. Capacity of circular array is doubled when push is called in a deque overflow state resulting in amortized. O(1) push operations | **28/28** (100%) |
 **Full Description:** https://ece.uwaterloo.ca/~dwharder/aads/Projects/2/Resizable_deque/
 
   

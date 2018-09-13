@@ -3,7 +3,7 @@
 | Complete?			| Description 	| Grade |
 | :---: 				| :--- 			| --- 	|
 | :heavy_check_mark:	| <Type> templated, self-balancing binary search tree w/iterator protected nodes | **16/16** (100%) |
-[**Full Description**](https://ece.uwaterloo.ca/~dwharder/aads/Projects/3/AVL_tree/)
+**Full Description:** https://ece.uwaterloo.ca/~dwharder/aads/Projects/3/AVL_tree/
    
 ##### Function Signatures
 - Search_tree();

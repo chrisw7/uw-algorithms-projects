@@ -16,15 +16,16 @@ The relationship between objects is often just as important as the information s
  
 | Relationship 			| Description	| Examples |
 | --- 					| ----- 			| ---- |
-| Linear order			| Every object is strictly less than, equal to, or greater than another and vice versa (transitive) | Integers, hexadecimal memory addresses, alphabet
-| Hierarchical order	| Each object has a *parent* object with the exception of a singular *root* object |  Unix directories, class inheritance in C# and Java
-| Partial order			| A hierarchical ordering with 1 or more root and no loops |  C++ classes (multiple inheritance), compilation dependencies
-| Equivalence relation	| Relationships where objects can be partitioned into subsets (equivalence relations) with other 'weakly' related (x~y) objects |  Landau symbol *Ө* `2n ~ 5n ∈ Ө(n)`
-| Weak order			| A linear ordering of equivalence classes |  Big-O notation `O(1)`< `O(ln(n))` < `O(n·ln(n))` 
-| Adjacency relation	| Relationships described by one object being connected to another (x ↔ y) |  Graphs, social networks
+| Linear order			| Every object is strictly less than, equal to, or greater than another| Integers, hexadecimal memory addresses, alphabet
+| Hierarchical order	| Each object has a *parent* object with the exception of the *root* object |  *nix directories, single class inheritance (C#, Java)
+| Partial order			| A hierarchical ordering with one or more root and no loops |  Multiple class inheritance (C++), dependencies
+| Equivalence relation	| Relationships where objects can be partitioned into subsets (equivalence relations) with other 'weakly' related (x~y) objects |  `2n ~ 5n ∈ Ө(n)`)
+| Weak order			| A linear ordering of equivalence classes |  `O(1)`< `O(ln(n))` < `O(n·ln(n))` 
+| Adjacency relation	| Relationships described by an object being connected to another (x ↔ y) |  Graphs, social networks
   
 ### Asymptotic Analysis & Big-O Notation
 It's often useful to analyze and compare algorithms with respect to one or more variables (i.e. run-time, memory). Using the same 'Big O' mathematical notation and Landau symbols used to describe the limiting behaviour of a function, the efficiency of different algorithms can be compared. For two algorithms described by the functions `f(n)` and `g(n)`, the best- and worst-case behaviour of the algorithms  can be described as such (*n* can be a measure of run-time or memory):
+<p align="center"><img src="img/big-O.png"/></p>
 
 - `f(n) = o(g(n))` when `f(n)` approaches ∞ at a slower rate than `g(n)` (**f outperforms g**)
 - `f(n) = O(g(n))` when `f(n)` approaches ∞ at a rate equal to or slower than `g(n)` (**f, at *worst*, performs the same g**)
@@ -32,11 +33,9 @@ It's often useful to analyze and compare algorithms with respect to one or more 
 - `f(n) = ω(g(n))` when `f(n)` approaches ∞ at a much slower rate than `g(n)` (**g outperforms f**)
 - `f(n) = Ө(g(n))` when `f(n)` and `g(n)` approach ∞ at comparable rates (**f and g perform roughly the same**)
 
-<p align="center"><img src="img/big-O.png"/></p>
-
 Note that since this notation describes limiting behaviour, one should be wary of making objective statements about the relative performance of two different algorithms without context. For example, even though f may run faster than g for n = 1000000, the opposite could be true when the same algorithms are run on only 1000 objects. Similarly, since Big-O notation gives information about the relative scaling and complexity of different algorithms rather than their absolute performance, for an algorithm f that scales faster than another, g, by a constant factor, `f(n) = Ө(g(n))` is still true.
 
-After taking these caveats into consideration, Landau symbols prove very useful for describing the complexity of an algorithm. An algorithm is considered to run in *polynomial time* if its run time can be described by `O(n^d)` for d greater than or equal to zero. Algorithms with polynomial time complexity are considered efficient in the current non-quantum state of computing, whereas problems that can not be solved in polynomial time are considered intractable or infeasible (e.g. the traveling salesman problem with complexity `O(n<sup>2</sup>2<sup>n</sup>) at best)`. Although these problems could still theoretically be solved, the scaling is computationally inefficient enough that it is typically not worth the effort except for special cases of the problem.
+After taking these caveats into consideration, Landau symbols prove very useful for describing the complexity of an algorithm. An algorithm is considered to run in *polynomial time* if its run time can be described by `O(n^d)` for d greater than or equal to zero. Algorithms with polynomial time complexity are considered efficient in the current non-quantum state of computing, whereas problems that can not be solved in polynomial time are considered intractable or infeasible (e.g. the traveling salesman problem). Although these problems could still theoretically be solved, the scaling is computationally inefficient enough that it is typically not worth the effort except for special cases of the problem.
 
 <p align="center"><img src="img/little-o.png"/></p>
 
@@ -71,7 +70,7 @@ Despite being a relatively simple data structure, efforts to optimize the effici
 >#### Project 2: [Resizable Deque](<2 Resizable Deque/>)
 >| Complete? 			| Description 	| Grade |
 >| :---: 				| :--- 			| --- 	|
->| :heavy_check_mark: 	| \<Type\> templated circular array implementation of a resizable deque structure. Capacity of dynamic array is doubled when push is called in a deque overflow state resulting in amortized. O(1) push operations | **28/28** (100%) |
+>| :heavy_check_mark: 	| \<Type\> templated resizable deque structure. Capacity of circular array is doubled when push is called in a deque overflow state resulting in amortized. O(1) push operations | **28/28** (100%) |
 ---
 ## Trees
 
@@ -96,46 +95,69 @@ A **binary heap** also uses the binary tree structure, and are frequently used t
 > | :heavy_check_mark:	| \<Type\> templated, self-balancing binary search tree w/iterator protected nodes | **16/16** (100%) |
 
 ---
-## Sorting Algorithms
+## Sorting
 
-At a fundamental level sorting involves taking an abstract list containing unsorted objects and converting it into a list of linearly ordered objects (an Abstract Sorted Lists). These operations are typically performed on arrays since they are the data type most commonly used for storing. *In-place* sorting algorithms can perform this conversion without making a second copy of the list in memory meaning memory allocation is `Ө(1)` at most. In terms of run-time efficiency, sorting algorithms fall into three different categories: `Ө(n)`, `Ө(n·ln(n))`, and `O(n^2)`, depending on the degree of unsortedness in the list an other factors. Of course, since every sorting algorithm must inspect every one of the n elements being sorted at least once, there is a `Ω(n) ` lower bound on the run-time of sorting algorithms (`Ω(n·ln(n)` being more realistic in most scenarios). The following descriptions assume elements are being sorted in ascending order from left to right.
+At a fundamental level sorting involves taking an abstract list containing unsorted objects and converting it into a list of linearly ordered objects (an Abstract Sorted Lists). These operations are typically performed on arrays since they are the data type most commonly used for storing. Every sorting algorithms rely on the the following five techniques: insertion, exchange, selection, merging, or distribution. *In-place* sorting algorithms can perform this conversion without making a second copy of the list in memory meaning memory allocation is `Ө(1)` at most. In terms of run-time efficiency, sorting algorithms fall into three different categories: `Ө(n)`, `Ө(n·ln(n))`, and `O(n^2)`, depending on the degree of unsortedness in the list an other factors. Of course, since every sorting algorithm must inspect every one of the n elements being sorted at least once, there is a `Ω(n) ` lower bound on the run-time of sorting algorithms (`Ω(n·ln(n)` being more realistic in most scenarios). The following descriptions assume elements are being sorted in ascending order from left to right.
 
 ### O(n<sup>2</sup>) sorts
-- **Insertion sort** starts from the second element in an array and compares it to the element to its left (using nested `for` loops). Under the condition that the element to its left is smaller, the current element is swapped with the lesser element until this condition is no longer true, at which point the current element is updated to the next unsorted object. As a result, after *k* iterations, the first *k* elements will be sorted. Subsequent iterations will insert an element from the unsorted section (right side) of the list into the sorted section (left side) of the list. Insertion sort is an *online* algorithm meaning it can sort a stream of inputs without knownig the final size of the list.
+- **Insertion sort** starts from the second element in an array and compares it to the element to its left (using nested `for` loops). Under the condition that the element to its left is smaller, the current element is swapped with the lesser element until this condition is no longer true, at which point the current element is updated to the next unsorted object. As a result, after *k* iterations, the first *k* elements will be sorted. Subsequent iterations will insert an element from the unsorted section (right side) of the list into the sorted section (left side) of the list. Insertion sort is an *online* algorithm meaning it can sort a stream of inputs without knowing the final size of the list.
 
-<p align="center"><img src="img/insert-sort.gif"/></p>
-
-- **Bubble sort** uses the opposite strategy; the first element is swapped with the element to its right until the element to its right is greater than the current element. After *k* iterations we are only guaranteed the right-most (largest) *k* items will be ordered. Unlike iterations of insertion sort (which terminate early when the current element finds its sorted position), every iteration of bubble sort requires every element in the unsorted section of the list be compared with its neighbor. with no opportunity for early termination. This gives insertion sort the advantage when it comes to partially-sorted lists. Moreover, because bubble sort relies on assuming the right-most element is always the global maximum, it is not an online algorithm meaning the algorithm, requiring bubble sort to restart every time an item is added to the list.
-
-<p align="center"><img src="img/bubble-sort.gif"/></p>
+- **Bubble sort** uses the opposite strategy; the first element is swapped with the element to its right until the element to its right is greater than the current element. After *k* iterations we are only guaranteed the right-most (largest) *k* items will be ordered. Unlike iterations of insertion sort (which terminate early when the current element finds its sorted position), every iteration of bubble sort requires every element in the unsorted section of the list be compared with its neighbor with no opportunity for early termination. This gives insertion sort an advantage when it comes to partially-sorted lists. Moreover, because bubble sort relies on assuming the right-most element is always the global maximum, it is not an online algorithm meaning the algorithm, requiring bubble sort to restart every time an item is added to the list.
 
 -  **Selection sort**, closely resembles insertion sort, but searches for the smallest unsorted element at every iteration before moving it to the (sorted) front of the array (rather than sorting the left-most unsorted element in each iteration) making it slightly less efficient than insertion sort.
 
+<p align="center">
+	<img src="img/insert-sort.gif"/>
+	<em>Animated illustration of an insertion sort</em>
+</p>
+
 ### Ө(n·ln(n)) sorts
-- **Quick sort**
-- **Merge sort**
+- **Heapsort** is the simplest of the `Ө(n·ln(n))` sorting algorithms and the only one that can be performed in-place (`O(1)` overhead). As the name implies, a heapsort transforms an unsorted list into a heap. This heap is converted to a max-heap meaning the largest (right-most) element in the sorted array will always be at the root of the heap. The element at the root node is then swapped with the element at the end of the heap before being removed from the heap entirely. At this point the heap is converted to a max-heap again, and the process repeats until the heap is empty. Because heapsort relies on a tree data structure, it is guaranteed to be `Ө(n·ln(n))` even for very large inputs while also maintaining a constant upper bound on memory overhead.
+
+- **Quicksort** is a recursive nearly-in-place sorting algorithm which is in most cases faster than heapsort. Quicksort chooses an element in the unsorted array as a *pivot* and splits the remaining elements into to two groups - one with elements less than the pivot, and the other with elements greater than the pivot. The pivot is moved to the middle of the array, and quicksort is called recursively on the sublists on either side of the pivot. A simple insertion sort is often used as the 'base case' for the recursion once the sublists being sorted are small enough. Although efficient implementations of quicksort have low memory overhead and are faster than heapsort on average, the worst-case scenario where the chosen pivot does not evenly divide the unsorted list can result in `O(n^2)` run-times which can be particularly problematic for very large inputs and leaves critical/secure applications relying on quicksort vulnerable to attack from a malicious party with a detailed understanding of the algorithm . The *median-of-three* strategy attempts to minimize the risk of running into the worst-case scenario by using the median of three (sometimes more) numbers from the beginning, end, and middle of the unsorted list as the pivot (with no significant effect on runtime).
+- **Merge sort** is an example of a *stable* divide-and-conquer sorting algorithm, meaning identical inputs are sorted in th same order than they appear in. Instead of using the value of an element to divide an unsorted list like quicksort, merge sort splits the larger problem into two sub-problems based on location in the array (typically the midpoint). Merge sort is called recursively on each sublist either until the sublist contains a single element or until it is small enough to be sorted using insertion sort efficiently, depending on the implementation. Elements of sorted sub-lists are then compared and merged together to form larger sorted lists until every element has been sorted. Because it is impossible to merge two arrays in-place, merge sort has an Ө(n) memory requirement that sets it apart from quicksort and heapsort.
 
 ### Ө(n) sorts
-- **Bucket sort**
-- **Radix sort**
+- **Bucket sort** and **radix sort** need to make assumptions about the data being stored in order to achieve run-times better than Ө(n·ln(n)). Both algorithms work best for inputs that are uniformly distributed over a known range, such as floating point numbers. Both algorithms create *buckets* (or *bins*) spanning the range of expected inputs before stepping through the unsorted list and placing each element in the unsorted array into their appropriate bucket. Bucket sort completes the sort by stepping through buckets (which span the entire range of possible values) in order and rebuilding the list in order using only filled buckets, whereas radix sort uses the results from the first iteration of bucketing by *least*-significant digit to 're-bucket' the elements by the next-most-significant digit. These distribution-based sorting algorithms have low memory requirements (depending on the range of the data) and fast run-times, although it ultimately depends on both the number of objects, n, and the range of the data stored in the objects, m.
 
 ### Summary: Sorting Algorithms
 
-| Algorithm			| Best			| Average		| Worst			| In-place? 		|
-| :--- 				| :--- 			|:---			|:---			| :---: 			|
-| Selection sort	| `Ω(n^2)`		|`Ө(n^2)`		|`O(n^2)`		| :heavy_check_mark:|
-| Bubble sort		| `Ω(n)`		|`Ө(n^2)`		|`O(n^2)`		| :heavy_check_mark:|
-| Insertion	sort	| `Ω(n)`		|`Ө(n^2)`		|`O(n^2)`		| :heavy_check_mark:|
-| Heap sort			| `Ω(n·ln(n))`	|`Ө(n·ln(n))`	|`O(n·ln(n))`	| :heavy_check_mark:|
-| Merge sort		| `Ω(n·ln(n))`	|`Ө(n·ln(n))`	|`O(n·ln(n))`	| :x:				|
-| Quick sort		| `Ω(n·ln(n))`	|`Ө(n·ln(n))`	|`O(n^2)`		| :x:				|
+The following table compares the algorithms discussed in the previous sections and details their individual run-time complexities. More sophisticated variations of these algorithms like Timsort, introsort, and shell sort are built using the core principles of these sorting algorithms.
 
+| Algorithm			| Best			| Average		| Worst			| In-place? 		| Distinguishing Features								|
+| :--- 				| :--- 			|:---			|:---			| :---: 			| :---													|
+| Selection sort	| `Ω(n^2)`		|`Ө(n^2)`		|`O(n^2)`		| :heavy_check_mark:| Easy to implement										|
+| Bubble sort		| `Ω(n)`		|`Ө(n^2)`		|`O(n^2)`		| :heavy_check_mark:| Easy to implement										|
+| Insertion	sort	| `Ω(n)`		|`Ө(n^2)`		|`O(n^2)`		| :heavy_check_mark:| Ideal for small *n*, online (streamed) lists 			|
+| Heapsort			| `Ω(n·ln(n))`	|`Ө(n·ln(n))`	|`O(n·ln(n))`	| :heavy_check_mark:| Main concerns are worst-case performance, memory		|
+| Quicksort			| `Ω(n·ln(n))`	|`Ө(n·ln(n))`	|`O(n^2)`		| :heavy_minus_sign:| Fastest but sometimes slowest, nearly in-place		|
+| Merge sort		| `Ω(n·ln(n))`	|`Ө(n·ln(n))`	|`O(n·ln(n))`	| :x:				| Fast + stable, but O(n) overhead						|
+| Bucket sort		| `Ω(n+m)`		|`Ө(n+m)`		|`O(n^2)`		| :x:				| Ideal for evenly distributed data						|
+| Radix sort		| `Ω(n·m)`		|`Ө(n·m)`		|`O(n·m)`		| :x:				| Ideal when `n >> m` (m = data range/# of radix digits)|
 
+---
+## Hash Tables
 
+Hash tables (sometimes called hash maps) are a data structure designed to store key/value pairs, the classic example being a name (key) and phone number (value). They are, by design, particularly efficient for 'lookup' operations - even more efficient than search trees - and consequently are widely used in caching and indexing related applications. A perfect hash table uses a *hash function* to generate a unique hash for every key, which is then mapped to a specific index of an array of *buckets*. This ideal table stores data so that all operations have Ө(1) time complexity and require at most Ө(n) memory overhead.  In reality, most hash functions have a non-zero chance of generating the same index for two distinct keys (a hash *collision*) and allow insertions and deletions at amortized constant average cost per operation.
 
+### Hash functions
+An efficient hash table requires a hash function that is fast and deterministic (meaning it always returns the same hash for any given key). For a 32-bit integer hash, two random objects should have a 1/2<sup>32</sup> chance of having the same hash value. Finally, for objects that are conceptually equivalent (e.g. 1/2 and -1/-2) will ideally have the same has value. Predetermined hash functions use a value that is explicitly assigned to an object. Examples are the address of an object in memory, or an  unique assigned ID like a social insurance number. Although convenient, explicit hash values often run into problems - for example, identical strings stored in two different variables would have different addresses in memory despite being conceptually the same.
 
+The obvious solution is to derive a hash function that depends on the input and its member variables. Arithmetic functions are the most common implementation of these 'implicit' has functions. Depending on the application, simple manipulations of the integer returned by casting an object as an integer (e.g. `static_cast<unsigned int>` in C++) are usually enough to generate a fast Ө(1) hash function with an even distribution and minimal chance of collision. Mapping this integer into an integer within the allowed indexing range for the array is easily accomplished using the modulo operator (`%`) and, in the case where the array size is a power of two, the remainder operation is reduced to masking (resulting in improved speed).
 
+### Collision Resolution
 
+Hash collisions are considered in most implementations of the hash table data structure are considered an inevitability for the same statistical reason that the birthday paradox arises. As Wikipedia states
 
+> if 2,450 keys are hashed into a million buckets, even with a perfectly uniform random distribution, according to the birthday problem there is approximately a 95% chance of at least two of the keys being hashed to the same slot
+
+Consequently, the way a hash table data structure handles collisions is typically where implementations differ the most. Collision resolution strategies usually fall into two categories: separate chaining, and open addressing. **Separate chaining** is the simplest approach, with each bucket in the array corresponding with a liked list. When an objects is assigned to a bucket already containing an object the `push` operation is called on the linked list in that bucket to extend the list. As the length of these linked lists grows, eventually the access times will start to increase - one of the reasons that a good has function with a uniform distribution is important. The load factor `λ = n/M` is used to describe the average number of objects per bucket and is directly related to the access time. An obvious disadvantage of using a linked list (and even implementations that use tree structures instead) with chained hash tables is that it requires a significant amount of dynamic memory allocation as the table grows.
+
+**Open addressing** circumvents this by following a predefined sequence of bins to search after a hash collision so that instead of using dynamic memory to store objects with matching has values, unused space in the contiguous block of memory reserved for the array is used. As a result, has tables with open addressing will never have a load factor greater than unity and are typically more efficient. Open addressing using linear probing is the most straightforward strategy; assuming an object is being inserted into bin *k*, linear probing dictates that the algorithm attempt to insert the object in bin *k+1* if bin *k* is full. If bin *k+1* is full, bin *k+2* is the next bin searched, and so on. Unfortunately, primary clustering as a result of this probing process can result in quickly increasing access timesNote that a hash table with open addressing requires each object be re-hashed each time the array is resized. This can be mitigated using quadratic probing, which uses the same strategy but uses a searching sequence that progresses quadratically instead of linearly. For an array with M = 2<sup>m</sup> bins using the rule `bin_index = initial_index + (k + k*k)/2` (where `k` is the loop iteration counter) is guaranteed to visit every bin once before repeating and results less problematic in secondary clustering instead of primary clustering.
+
+> #### Project 4: [Quadratic Hash Table](<4 Quadratic Hash Table/>)
+> | Complete?			| Description 	| Grade |
+> | :---: 				| :--- 			| --- 	|
+> | :heavy_check_mark:	| \<Type\> templated hash table with open addressing (quadratic probing) and Ө(1) operations for load factors < ~0.666  | **8/8** (100%) |
 
 

@@ -2,8 +2,9 @@
 
 | Complete?	| Description 	| Grade |
 | :---: 			| :--- 			| --- 	|
-| :heavy_check_mark: | \<Type\> templated linked list w/a second sentinel at the end (for improved indexing/insertion at the back of the list) and O(1) copy & move constructors| | **24/24** (100%) |
-**Full Description:**https://ece.uwaterloo.ca/~dwharder/aads/Projects/1/Double_sentinel_list/
+| :heavy_check_mark: | \<Type\> templated linked list w/a second sentinel at the end (for improved indexing/insertion at the back of the list) and O(1) copy & move constructors| **24/24** (100%) |
+
+**Full Description:** https://ece.uwaterloo.ca/~dwharder/aads/Projects/1/Double_sentinel_list/
   
 ##### Member Variables
 - ```Double_Node list_head```
