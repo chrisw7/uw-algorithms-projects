@@ -126,16 +126,16 @@ At a fundamental level sorting involves taking an abstract list containing unsor
 
 The following table compares the algorithms discussed in the previous sections and details their individual run-time complexities. More sophisticated variations of these algorithms like Timsort, introsort, and shell sort are built using the core principles of these sorting algorithms.
 
-| Algorithm			| Best			| Average		| Worst			| In-place? 		| Distinguishing Features								|
+| Algorithm			| Best			| Average		| Worst			| In-place? 		| Usage/Distinguishing Features							|
 | :--- 				| :--- 			|:---			|:---			| :---: 			| :---													|
 | Selection sort	| `Ω(n^2)`		|`Ө(n^2)`		|`O(n^2)`		| :heavy_check_mark:| Easy to implement										|
 | Bubble sort		| `Ω(n)`		|`Ө(n^2)`		|`O(n^2)`		| :heavy_check_mark:| Easy to implement										|
 | Insertion	sort	| `Ω(n)`		|`Ө(n^2)`		|`O(n^2)`		| :heavy_check_mark:| Ideal for small *n*, online (streamed) lists 			|
-| Heapsort			| `Ω(n·ln(n))`	|`Ө(n·ln(n))`	|`O(n·ln(n))`	| :heavy_check_mark:| Main concerns are worst-case performance, memory		|
+| Heapsort			| `Ω(n·ln(n))`	|`Ө(n·ln(n))`	|`O(n·ln(n))`	| :heavy_check_mark:| Main concern is worst-case performance/memory			|
 | Quicksort			| `Ω(n·ln(n))`	|`Ө(n·ln(n))`	|`O(n^2)`		| :heavy_minus_sign:| Fastest but sometimes slowest, nearly in-place		|
 | Merge sort		| `Ω(n·ln(n))`	|`Ө(n·ln(n))`	|`O(n·ln(n))`	| :x:				| Fast + stable, but O(n) overhead						|
 | Bucket sort		| `Ω(n+m)`		|`Ө(n+m)`		|`O(n^2)`		| :x:				| Ideal for evenly distributed data						|
-| Radix sort		| `Ω(n·m)`		|`Ө(n·m)`		|`O(n·m)`		| :x:				| Ideal when `n >> m` (m = data range/# of radix digits)|
+| Radix sort		| `Ω(n·m)`		|`Ө(n·m)`		|`O(n·m)`		| :x:				| Ideal for `n>>m` (m = range/# of radix digits)		|
 
 ---
 ## Hash Tables
@@ -171,14 +171,14 @@ A graph is considered a *tree* if it is connected and there is a unique path bet
 
 A **directed acyclic graph** (DAG) refers to a graph that is both directed and also does not contain any cycles. Besides being well-defined, DAGs have a number of useful properties that make them useful in a variety of applications. Among these applications are dependency graphs formed by inheritance relationships in object-oriented programming languages, and file systems. Implementations of any type of graph data structure must decide on how the adjacency relationships that comprise the graph are stored. The simplest solution, the binary-relation , which uses a container with a list of pairs representing each individual connection is the least efficient solution. An adjacency matrix uses each entry of a `V x V` matrix to store connections, with each cell `(i,j)` containing information about the edge from node `i` to node `j` . Although adjacency matrices are more efficient than binary-relations, graphs are most efficiently implemented using an adjacency list where every vertex is associated with a list of its neighbors. Adjacency matrices are still preferred, however, if the graph is dense ( `E ~ V^2`).
 
-### Graph Algorithms
-The partial ordering that represents a dependency graph, or any other DAG can be sorted topologically such that V<sub>a</sub> appears before V<sub>b</sub> only when there is a path from V<sub>a</sub> to V<sub>b</sub>. In the case of a dependency graph, a topological sort provides a feasible schedule or order in which every node can be visited without breaking any dependencies. Since every DAG has at least one *source* (a node with an in-degree of zero) and no cycles, every DAG and its sub-graphs must also have a topological sort. Topological sorts are usually implemented using a queue initialized with all source vertices and an array containing the in-degree of each vertex in the graph. Starting with the first vertex in the queue, nodes are popped one-by-one until the queue is empty, with the in-degree of each one of the nodes adjacent to the node being popped being decremented each time. Once the in-degree of a neighbouring reaches zero, it is pushed onto the queue. The order of the nodes popped from the queue defines the topological sort. 
+### Topological Sorts
+The partial ordering that represents a dependency graph (or any other DAG) can be sorted topologically in linear order such that V<sub>a</sub> appears before V<sub>b</sub> only when there is a path from V<sub>a</sub> to V<sub>b</sub>. In the case of a dependency graph, a topological sort provides a feasible schedule or order in which every node can be visited without breaking any dependencies. Since every DAG has at least one *source* (a node with an in-degree of zero) and no cycles, every DAG and its sub-graphs must also have a topological sort. Topological sorts are usually implemented using a queue initialized with all source vertices and an array containing the in-degree of each vertex in the graph. Starting with the first vertex in the queue, nodes are popped one-by-one until the queue is empty, with the in-degree of each one of the nodes adjacent to the node being popped being decremented each time. Once the in-degree of a neighbouring reaches zero, it is pushed onto the queue. The order of the nodes popped from the queue defines the topological sort. 
 
 In the case where there is a weight associated with each edge, it is also useful to find the *critical path*, that is the longest path from the first node (or, in project scheduling, milestone) to the last. For example, a dependency graph where each weight represents the time required to complete the task represented by each vertex, the critical time would represent the longest, rate-determining sequence of tasks that cannot be parallelized with respect to each other (any delay to tasks this sequence will delay the overall task). 
 
 <p align="center">
 <img src="img/critical-path.png"/></p>
-<p align="center"><em>Path `A → D → E` with length 1.1 is shorter than path `A → B → C → E` with length 1.3, but since E requires C, the longest path is considered the critical (rate-determining) path</em><p align="center">
+<p align="center"><em>Path <em>A → D → E</em> with length 1.1 is shorter than path <em>A → B → C → E</em> with length 1.3, but since E requires C, the longest path is considered the critical (rate-determining) path</em><p align="center">
 
 
 For our topological sort algorithm, if, in addition to the in-degree, we use arrays to keep track of the critical time and previous task for each node (initialized to zero/null) and, every time a vertex is popped: 

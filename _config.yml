@@ -1,0 +1,14 @@
+# basic options
+title: Chiristopher Williams
+description: Homepage & portfolio for Christopher Williams
+github_username:  chrisw7
+email: chris.w.2@live.com
+
+collections:
+   projects:
+      output: true
+      permalink: /:path
+
+# Build settings
+markdown: kramdown
+#theme: minima
