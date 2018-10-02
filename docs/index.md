@@ -1,12 +1,18 @@
-# [ECE 250 - Data Structures & Algorithms](https://ece.uwaterloo.ca/~dwharder/aads/Outline/)
+---
+title: ECE 250 Review
+layout: default
+---
 
-**Course Objectives**
+# [Return to home site]({{ page.url}})
+
+[**Course Objectives**](https://ece.uwaterloo.ca/~dwharder/aads/Outline/)
 
 > Introduce the student to the concept of data structures through abstract data structures including lists, sorted lists, stacks, queues, deques, sets/maps, directed acyclic graphs, and graphs; and implementations including the use of linked lists, arrays, binary search trees, M-way search trees, hash tables, complete trees, and adjacency matrices and lists.
 
 > Introduce the student to algorithms design including greedy, divide-and-conquer, random and backtracking algorithms and dynamic programming; and specific algorithms including, for example, resizing arrays, balancing search trees, shortest path, and spanning trees.
 
 ---
+
 ## Background
 
 Data structures & algorithms govern the way we interact with digital information. At the highest level, they are used to organize and access abstract data types like containers (which store collections of objects).
@@ -40,6 +46,7 @@ After taking these caveats into consideration, Landau symbols prove very useful 
 <p align="center"><img src="img/little-o.png"/></p>
 
 ---
+
 ## Linked Lists
 
 Linked lists are the simplest type of data structure, consisting of a set of linearly ordered nodes that, in addition to storing data, also contain an address pointing to the location next node in memory.
@@ -50,6 +57,7 @@ Linked lists are the simplest type of data structure, consisting of a set of lin
 - Cons: Inefficient indexing, poor cache locality
 
 >#### Project 1: [Doubly Linked Sentinel List](<1 Doubly Linked List/>)
+>
 >| Complete?	| Description 	| Grade |
 >| :---: 			| :--- 			| --- 	|
 >| :heavy_check_mark: | \<Type\> templated linked list w/a second sentinel at the end (for improved indexing/insertion at the back of the list) and O(1) copy & move constructors | **24/24** (100%) |
@@ -68,9 +76,11 @@ Despite being a relatively simple data structure, efforts to optimize the effici
 <p align="center"><img src="img/deque.png"/></p>
 
 >#### Project 2: [Resizable Deque](<2 Resizable Deque/>)
+>
 >| Complete? 			| Description 	| Grade |
 >| :---: 				| :--- 			| --- 	|
 >| :heavy_check_mark: 	| \<Type\> templated resizable deque structure. Capacity of circular array is doubled when push is called in a deque overflow state resulting in amortized. O(1) push operations | **28/28** (100%) |
+
 ---
 ## Trees
 
@@ -90,6 +100,7 @@ Given the importance of tree height on their performance, it's no surprise exten
 A **binary heap** also uses the binary tree structure, and are frequently used to implement priority queues. The distinguishing feature of a min-heap is that every child contains a key less than or equal to its parent (and vice versa for max-heaps). A **B+-tree** is another example of a balanced *N*-ary tree with a variable (and typically large) number of children for each node that is particularly useful in retrieval of block-oriented storage contexts (i.e file systems). Finally, unlike an *N*-ary tree, a **multi-way (*M*-way) search tree** can store *M*-1 elements and can have up to *M* sub-trees.
 
 > #### Project 3: [AVL Search Tree](<3 AVL Search Tree/>)
+>
 > | Complete?			| Description 	| Grade |
 > | :---: 				| :--- 			| --- 	|
 > | :heavy_check_mark:	| \<Type\> templated, self-balancing binary search tree w/iterator protected nodes | **16/16** (100%) |
@@ -101,19 +112,19 @@ At a fundamental level sorting involves taking an abstract list containing unsor
 
 ### O(n<sup>2</sup>) sorts
 - **Insertion sort** starts from the second element in an array and compares it to the element to its left (using nested `for` loops). Under the condition that the element to its left is smaller, the current element is swapped with the lesser element until this condition is no longer true, at which point the current element is updated to the next unsorted object. As a result, after *k* iterations, the first *k* elements will be sorted. Subsequent iterations will insert an element from the unsorted section (right side) of the list into the sorted section (left side) of the list. Insertion sort is an *online* algorithm meaning it can sort a stream of inputs without knowing the final size of the list.
-
-- **Bubble sort** uses the opposite strategy; the first element is swapped with the element to its right until the element to its right is greater than the current element. After *k* iterations we are only guaranteed the right-most (largest) *k* items will be ordered. Unlike iterations of insertion sort (which terminate early when the current element finds its sorted position), every iteration of bubble sort requires every element in the unsorted section of the list be compared with its neighbor with no opportunity for early termination. This gives insertion sort an advantage when it comes to partially-sorted lists. Moreover, because bubble sort relies on assuming the right-most element is always the global maximum, it is not an online algorithm meaning the algorithm, requiring bubble sort to restart every time an item is added to the list.
-
--  **Selection sort**, closely resembles insertion sort, but searches for the smallest unsorted element at every iteration before moving it to the (sorted) front of the array (rather than sorting the left-most unsorted element in each iteration) making it slightly less efficient than insertion sort.
-
 <p align="center">
 	<img src="img/insert-sort.gif"/>
 </p>
 <p align="center">
 	<em>Animated illustration of an insertion sort</em>
-</p align="center">
+</p>
+
+- **Bubble sort** uses the opposite strategy; the first element is swapped with the element to its right until the element to its right is greater than the current element. After *k* iterations we are only guaranteed the right-most (largest) *k* items will be ordered. Unlike iterations of insertion sort (which terminate early when the current element finds its sorted position), every iteration of bubble sort requires every element in the unsorted section of the list be compared with its neighbor with no opportunity for early termination. This gives insertion sort an advantage when it comes to partially-sorted lists. Moreover, because bubble sort relies on assuming the right-most element is always the global maximum, it is not an online algorithm meaning the algorithm, requiring bubble sort to restart every time an item is added to the list.
+
+-  **Selection sort**, closely resembles insertion sort, but searches for the smallest unsorted element at every iteration before moving it to the (sorted) front of the array (rather than sorting the left-most unsorted element in each iteration) making it slightly less efficient than insertion sort.
 
 ### Ө(n·ln(n)) sorts
+
 - **Heapsort** is the simplest of the `Ө(n·ln(n))` sorting algorithms and the only one that can be performed in-place (`O(1)` overhead). As the name implies, a heapsort transforms an unsorted list into a heap. This heap is converted to a max-heap meaning the largest (right-most) element in the sorted array will always be at the root of the heap. The element at the root node is then swapped with the element at the end of the heap before being removed from the heap entirely. At this point the heap is converted to a max-heap again, and the process repeats until the heap is empty. Because heapsort relies on a tree data structure, it is guaranteed to be `Ө(n·ln(n))` even for very large inputs while also maintaining a constant upper bound on memory overhead.
 
 - **Quicksort** is a recursive nearly-in-place sorting algorithm which is in most cases faster than heapsort. Quicksort chooses an element in the unsorted array as a *pivot* and splits the remaining elements into to two groups - one with elements less than the pivot, and the other with elements greater than the pivot. The pivot is moved to the middle of the array, and quicksort is called recursively on the sublists on either side of the pivot. A simple insertion sort is often used as the 'base case' for the recursion once the sublists being sorted are small enough. Although efficient implementations of quicksort have low memory overhead and are faster than heapsort on average, the worst-case scenario where the chosen pivot does not evenly divide the unsorted list can result in `O(n^2)` run-times which can be particularly problematic for very large inputs and leaves critical/secure applications relying on quicksort vulnerable to attack from a malicious party with a detailed understanding of the algorithm . The *median-of-three* strategy attempts to minimize the risk of running into the worst-case scenario by using the median of three (sometimes more) numbers from the beginning, end, and middle of the unsorted list as the pivot (with no significant effect on runtime).
@@ -138,6 +149,7 @@ The following table compares the algorithms discussed in the previous sections a
 | Radix sort		| `Ω(n·m)`		|`Ө(n·m)`		|`O(n·m)`		| :x:				| Ideal for `n>>m` (m = range/# of radix digits)		|
 
 ---
+
 ## Hash Tables
 
 Hash tables (sometimes called hash maps) are a data structure designed to store key/value pairs, the classic example being a name (key) and phone number (value). They are, by design, particularly efficient for 'lookup' operations - even more efficient than search trees - and consequently are widely used in caching and indexing related applications. A perfect hash table uses a *hash function* to generate a unique hash for every key, which is then mapped to a specific index of an array of *buckets*. This ideal table stores data so that all operations have Ө(1) time complexity and require at most Ө(n) memory overhead.  In reality, most hash functions have a non-zero chance of generating the same index for two distinct keys (a hash *collision*) and allow insertions and deletions at amortized constant average cost per operation.
@@ -160,6 +172,7 @@ Consequently, the way a hash table data structure handles collisions is typicall
 **Open addressing** circumvents this by following a predefined sequence of bins to search after a hash collision so that instead of using dynamic memory to store objects with matching has values, unused space in the contiguous block of memory reserved for the array is used. As a result, has tables with open addressing will never have a load factor greater than unity and are typically more efficient. Open addressing using linear probing is the most straightforward strategy; assuming an object is being inserted into bin *k*, linear probing dictates that the algorithm attempt to insert the object in bin *k+1* if bin *k* is full. If bin *k+1* is full, bin *k+2* is the next bin searched, and so on. Unfortunately, primary clustering as a result of this probing process can result in quickly increasing access timesNote that a hash table with open addressing requires each object be re-hashed each time the array is resized. This can be mitigated using quadratic probing, which uses the same strategy but uses a searching sequence that progresses quadratically instead of linearly. For an array with M = 2<sup>m</sup> bins using the rule `bin = init_index + (k + k*k)/2` (where `k` is the loop iteration counter) is guaranteed to visit every bin once before repeating and results less problematic in secondary clustering instead of primary clustering.
 
 > #### Project 4: [Quadratic Hash Table](<4 Quadratic Hash Table/>)
+>
 > | Complete?			| Description 	| Grade |
 > | :---: 				| :--- 			| --- 	|
 > | :heavy_check_mark:	| \<Type\> templated hash table with open addressing (quadratic probing) and Ө(1) operations for load factors < ~0.666  | **8/8** (100%) |
@@ -177,8 +190,11 @@ The partial ordering that represents a dependency graph (or any other DAG) can b
 In the case where there is a weight associated with each edge, it is also useful to find the *critical path*, that is the longest path from the first node (or, in project scheduling, milestone) to the last. For example, a dependency graph where each weight represents the time required to complete the task represented by each vertex, the critical time would represent the longest, rate-determining sequence of tasks that cannot be parallelized with respect to each other (any delay to tasks this sequence will delay the overall task). 
 
 <p align="center">
-<img src="img/critical-path.png"/></p>
-<p align="center"><em>Path <em>A → D → E</em> with length 1.1 is shorter than path <em>A → B → C → E</em> with length 1.3, but since E requires C, the longest path is considered the critical (rate-determining) path</em><p align="center">
+	<img src="img/critical-path.png"/>
+</p>
+<p align="center">
+	<em>Path <em>A → D → E</em> with length 1.1 is shorter than path <em>A → B → C → E</em> with length 1.3, but since E requires C, the longest path is considered the critical (rate-determining) path</em>
+</p>
 
 
 For our topological sort algorithm, if, in addition to the in-degree, we use arrays to keep track of the critical time and previous task for each node (initialized to zero/null) and, every time a vertex is popped: 
@@ -187,3 +203,5 @@ For our topological sort algorithm, if, in addition to the in-degree, we use arr
 the order of the topological sort will also be the shortest critical path of the DAG.
 
 ### Minimum Spanning Trees and Shortest-path Algorithms
+
+[MST writeup]
