@@ -17,8 +17,8 @@ title: Data Structure & Algorithms Notes
 email: your-email@example.com
 description: >- # this means to ignore newlines until "baseurl:"
     ECE 250 Course Review
-baseurl: "/algorithms" # the subpath of your site, e.g. /blog
-url: "https://www.chrisw7.github.io"
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://chrisw7.github.io"
 twitter_username: jekyllrb
 github_username:  jekyll
 
