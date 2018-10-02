@@ -1,4 +1,6 @@
 3\ AVL\ Search\ Tree/orig/
+old/
+site/
 *.gz
 *.out
 *.zip
@@ -9,4 +11,3 @@ Link*
 */.vs/
 */cmake*
 *.zip
-/site
