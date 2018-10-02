@@ -18,7 +18,7 @@ email: your-email@example.com
 description: >- # this means to ignore newlines until "baseurl:"
     ECE 250 Course Review
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://chrisw7.github.io"
+url: ""
 twitter_username: jekyllrb
 github_username:  jekyll
 
