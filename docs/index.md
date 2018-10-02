@@ -1,6 +1,6 @@
 ---
 title: ECE 250 Review
-layout: default
+layout: home
 ---
 
 # [Return to home site]({{ page.url}})
